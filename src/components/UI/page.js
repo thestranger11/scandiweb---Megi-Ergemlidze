@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { COLORS } from '../../helpers/constants';
 import { Container } from '../../helpers/utils';
 import {connect} from 'react-redux';
+import {toggleBackdrop} from '../../slices/backdropSlice';
 
 class Page extends Component {
+	backdropHandler = () => {
+		this.props.dispatch(toggleBackdrop(false));
+	};
 	render() {
 		return (
 			<Main>
-				{this.props.backdrop && <Backdrop />}
+				{this.props.backdrop && <Backdrop onClick={this.backdropHandler} />}
 				<Container>
 					{this.props.title && (
 						<Title>{this.props.title}</Title>

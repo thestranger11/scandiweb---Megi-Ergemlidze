@@ -54,7 +54,7 @@ class CategoryPage extends Component {
               	}
             `
 		}).then(result => {
-			console.log(result.data.category);
+			// console.log(result.data.category);
 			if(!result.data.category){
 				this.setState({
 					error: true

@@ -123,6 +123,7 @@ const Thumb = styled.div`
     width: 80px;
     height: 80px;
     background: ${COLORS.shadow};
+    cursor: pointer;
     ${props => props.active && css`
         outline: ${COLORS.primary} solid 1px;
         outline-offset: 1px;

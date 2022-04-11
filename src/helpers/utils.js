@@ -48,6 +48,7 @@ export const Button = styled.div`
 	text-align: center;
 	text-transform: uppercase;
 	box-sizing: border-box;
+	cursor: pointer;
 	${props => props.size === 'small' ? css`
 		padding: 13px;
 		width: 140px;

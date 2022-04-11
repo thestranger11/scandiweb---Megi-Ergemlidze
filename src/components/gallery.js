@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { COLORS } from '../helpers/constants';
 import NoImage from '../assets/noImage.jpeg';
 import { css } from 'styled-components';
+import RightArrow from '../assets/rightArrow.png';
+import LeftArrow from '../assets/leftArrow.png';
 
 class Gallery extends Component {
 	state = { activeIndex: 0 };
@@ -10,7 +12,26 @@ class Gallery extends Component {
 	changeHandler = (index) => {
 		this.setState({activeIndex: index});
 	};
-
+	nextHandler = (i) => {
+		if(i === this.props.data.length - 1){
+			return this.setState({
+				activeIndex: 0
+			});
+		}
+		this.setState(prevState=>({
+			activeIndex: prevState.activeIndex+1
+		}));
+	};
+	prevHandler = (i) => {
+		if(i === 0){
+			return this.setState({
+				activeIndex: this.props.data.length - 1
+			});
+		}
+		this.setState(prevState=>({
+			activeIndex: prevState.activeIndex-1
+		}));
+	};
 	render() { 
 		if(!this.props.data || this.props.data.length <=0){
 			return (
@@ -20,18 +41,35 @@ class Gallery extends Component {
 			);
 		}
 		return (
-			<Flex>
-				<Thumbnails>
-					{this.props.data.map((item,index)=>(
-						<Thumb
-							key={item} 
-							active={this.state.activeIndex === index} 
-							onClick={() => this.changeHandler(index)}
+			<Flex thumbnails={this.props.thumbnails}>
+				{this.props.thumbnails && (
+					<Thumbnails>
+						{this.props.data.map((item,index)=>(
+							<Thumb
+								key={item} 
+								active={this.state.activeIndex === index} 
+								onClick={() => this.changeHandler(index)}
+							>
+								<img src={item} alt={item} />
+							</Thumb>
+						))}
+					</Thumbnails>
+				)}
+				{!this.props.thumbnails && (
+					<Arrows>
+						<Arrow 
+							onClick={() => this.prevHandler(this.state.activeIndex)}
 						>
-							<img src={item} alt={item} />
-						</Thumb>
-					))}
-				</Thumbnails>
+							<img src={LeftArrow} alt="previous slide" />
+						</Arrow>
+						<Arrow
+							right
+							onClick={() => this.nextHandler(this.state.activeIndex)}
+						>
+							<img src={RightArrow} alt="next slide" />
+						</Arrow>
+					</Arrows>
+				)}
 				<Slider>
 					{this.props.data.map((item,index)=>(
 						<Slide key={item} active={this.state.activeIndex === index}>
@@ -49,7 +87,7 @@ export default Gallery;
 const Flex = styled.div`
     display: flex;
     position: relative;
-    padding-left: 120px;
+    padding-left: ${props => props.thumbnails ? '120px' : 0};
 `;
 const Slider = styled.div`
     width: 100%;
@@ -96,4 +134,17 @@ const Thumb = styled.div`
         object-position: top;
         object-fit: cover;
     }
+`;
+const Arrows = styled.div`
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+`;
+const Arrow = styled.button`
+    color: ${COLORS.white};
+    padding: 9px;
+    cursor: pointer;
 `;

@@ -121,7 +121,10 @@ class ProductPage extends Component {
 			<Page>
 				<Article>
 					<GalleryContainer>
-						<Gallery data={product.gallery} />
+						<Gallery
+							thumbnails
+							data={product.gallery}
+						/>
 					</GalleryContainer>
 					<ProductDetails>
 						<Title>{product.name}</Title>

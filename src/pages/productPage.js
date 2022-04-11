@@ -9,6 +9,7 @@ import Loader from '../components/UI/loader';
 import RadioButtons from '../components/radioButtons';
 import { COLORS } from '../helpers/constants';
 import {addProduct} from '../slices/cartSlice';
+import Gallery from '../components/gallery';
 
 class ProductPage extends Component {
 	state = {}; 
@@ -118,8 +119,10 @@ class ProductPage extends Component {
 		}
 		return (
 			<Page>
-				<article>
-					{/* // <Gallery /> */}
+				<Article>
+					<GalleryContainer>
+						<Gallery data={product.gallery} />
+					</GalleryContainer>
 					<ProductDetails>
 						<Title>{product.name}</Title>
 						<Category>{product.category}</Category>
@@ -152,7 +155,7 @@ class ProductPage extends Component {
 						</FieldContainer>
 					
 					</ProductDetails>
-				</article>
+				</Article>
 			</Page>
 		);
 	}
@@ -163,7 +166,18 @@ const mapStateToProps = (state) =>({
 export default withRouter(
 	connect(mapStateToProps)(ProductPage)
 );
-
+const Article = styled.article`
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+`;
+const GalleryContainer = styled.div`
+	width: 50%;
+	@media(max-width: 768px){
+		width: 100%;
+		margin-bottom: 30px;
+	}
+`;
 const Title = styled.h1`
 	font-size: 1.666rem;
 	line-height: .9em;
@@ -188,6 +202,17 @@ const Label = styled.span`
 `;
 const ProductDetails = styled.div`
 	text-align: left;
+	padding: 0 100px;
+	width: 50%;
+	box-sizing: border-box;
+	@media(max-width: 1024px){
+		padding: 0 50px;
+	}
+	@media(max-width: 768px){
+		padding: 0;
+		width: 100%;
+		margin-bottom: 30px;
+	}
 `;
 const Price = styled.dd`
 	font-size: 1.333rem;
@@ -199,19 +224,6 @@ const Price = styled.dd`
 const FieldContainer = styled.div`
 	margin: 40px 0;
 `;
-// const Button = styled.button`
-// 	background: ${COLORS.primary};
-// 	color: ${COLORS.white};
-// 	border: none;
-// 	padding: 16px;
-// 	width: 290px;
-// 	max-width: 100%;
-// 	margin-top: 25px;
-// 	text-align: center;
-// 	text-transform: uppercase;
-// 	font-size: .9rem;
-// 	line-height: 1.2em;
-// `;
 const Description = styled.p`
 	font-size: .9rem;
 	line-height: 1.6em;

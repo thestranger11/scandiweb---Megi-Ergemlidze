@@ -46,6 +46,7 @@ const Radio = styled.label`
 	box-sizing: border-box;
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	position: relative;
+	margin-top: 2px;
 	${props => props.size === 'small' ? css`
 		padding: 4px 6px;
 		font-size: .777rem;

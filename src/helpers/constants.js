@@ -9,6 +9,7 @@ export const COLORS = {
 	clear: 'transparent',
 	disabledText: '#A6A6A6',
 	disabledBg: 'rgba(166, 166, 166, 0.2)',
+	devider: '#E5E5E5'
 };
 export const FONTS = {
 	primary: 'Raleway, sans-serif',

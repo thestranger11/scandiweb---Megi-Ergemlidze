@@ -41,6 +41,7 @@ class MiniCart extends Component {
 							</CartTitle>
 							{this.props.products.length > 0 && this.props.products.map(item=>(
 								<CartItem 
+									mini
 									key={item.id}
 									item={item}
 									clicked={()=>{

@@ -33,6 +33,7 @@ class RadioButtons extends Component {
 						/>
 					</Radio>
 				))}
+				{this.props.disabled && <span className='tooltip'>{this.props.name}</span>}
 			</Flex>
 		);
 	}
@@ -94,6 +95,31 @@ const Flex = styled.div`
     flex-wrap: wrap;
 	margin: 5px 0;
 	max-width: 100%;
-	overflow-x: auto;
+	/* overflow-x: auto; */
 	padding: 3px;
+	position: relative;
+	span.tooltip {
+		position: absolute;
+		z-index: 1;
+		visibility: hidden;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+		width: 120px;
+		bottom: 100%;
+		left: 50%;
+		margin-left: -60px;
+		font-size: .7rem;
+		opacity: 0;
+		transition: opacity 500ms;
+		width: 120px;
+		font-weight: 500;
+	}
+	&:hover span.tooltip {
+		visibility: visible;
+		height: auto;
+		opacity: 1;
+	}
 `;

@@ -135,6 +135,7 @@ const CartBtn = styled.button`
     font-size: 1rem;
     line-height: 1.6em;
     color: ${COLORS.text};
+	cursor: pointer;
 `;
 const ToggleContainer = styled.div`
     position: relative;

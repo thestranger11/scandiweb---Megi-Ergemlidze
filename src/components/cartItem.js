@@ -159,6 +159,7 @@ const ActionButton = styled.button`
 	line-height: 1em;
 	font-weight: 200;
 	font-family: ${FONTS.primary};
+	cursor: pointer;
 	${props => props.size === 'small' ? css`
 		width: 24px;
 		height: 24px;

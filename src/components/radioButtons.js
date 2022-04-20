@@ -86,6 +86,7 @@ const Radio = styled.label`
 		left: 0;
 		top: 0;
 		opacity: 0;
+		cursor: ${props => props.disabled ? 'default' : 'pointer'};
     }
 `;
 const Flex = styled.div`

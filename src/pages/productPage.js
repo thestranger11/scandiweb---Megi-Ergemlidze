@@ -14,7 +14,7 @@ import Gallery from '../components/gallery';
 class ProductPage extends Component {
 	state = {}; 
 	fetchData = () => {
-		const id = this.props.router.params.id;
+		const id = this.props.router.params.id ? this.props.router.params.id : this.props.id;
 		client.query({
 			query: gql`
               	query getProducts {
@@ -91,6 +91,7 @@ class ProductPage extends Component {
 			attributes: [...this.state.attributes],
 			chosenAttributes: [...this.state.attributeValues],
 		}));
+		this.props.popupHandler();
 	};
 	attributesChangeHandler = (name, val) => {
 		let updatedAttributes = [...this.state.attributeValues];

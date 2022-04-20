@@ -7,6 +7,8 @@ import Loader from '../components/UI/loader';
 import Product from '../components/product';
 import styled from 'styled-components';
 import NotFoundPage from './notFoundPage';
+import {addProduct} from '../slices/cartSlice';
+import ProductPage from './productPage';
 
 class CategoryPage extends Component {
 	state = {}; 
@@ -54,7 +56,6 @@ class CategoryPage extends Component {
               	}
             `
 		}).then(result => {
-			// console.log(result.data.category);
 			if(!result.data.category){
 				this.setState({
 					error: true
@@ -75,6 +76,26 @@ class CategoryPage extends Component {
 			this.fetchData();
 		}
 	}
+	attributesHandler = (item) => {
+		this.setState(prevState=>({
+			...prevState,
+			popupContent: item
+		}));
+	};
+	addToCartHandler = (item) => {
+		// openPopup();
+		this.props.dispatch(addProduct({
+			id: item.id+JSON.stringify(this.state.attributeValues),
+			url: `/shop/all/${item.id}`,
+			name: item.name,
+			cat: item.category,
+			prices: item.prices,
+			count: 1,
+			image: item.gallery,
+			attributes: [...this.state.attributes],
+			chosenAttributes: [...this.state.attributeValues],
+		}));
+	};
 	render() { 
 		if(!this.state.category && this.state.error){
 			return <NotFoundPage />;
@@ -83,7 +104,16 @@ class CategoryPage extends Component {
 			return <Loader />;
 		}
 		return (
-			<Page title={this.state.category.name}>
+			<Page 
+				title={this.state.category.name} 
+				popupContent={this.state.popupContent && (
+					<ProductPage 
+						id={this.state.popupContent.id} 
+						popupHandler={this.attributesHandler} 
+					/>
+				)}
+				onPopupClose={this.attributesHandler}
+			>
 				{this.state.category.products && (
 					<ProductList>
 						{this.state.category.products.map(item=>(
@@ -97,6 +127,7 @@ class CategoryPage extends Component {
 								}
 								inStock={item.inStock}
 								url={`/shop/${this.state.category.name}/${item.id}`}
+								onAddToCart={()=>this.attributesHandler(item)}
 							/>
 						))}
 					</ProductList>

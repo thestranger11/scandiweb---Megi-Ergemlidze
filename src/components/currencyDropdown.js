@@ -63,8 +63,7 @@ class CurrencyDropdown extends Component {
 					</Flex>
 				</Button>
 				{this.state.visible && (
-					<Card onClick={()=>console.log('card')}
-					>
+					<Card>
 						<ul>
 							{this.state.currencies.map(item=>(
 								<li key={item.label}>

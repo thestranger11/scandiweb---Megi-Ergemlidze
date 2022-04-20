@@ -24,6 +24,7 @@ class CartPage extends Component {
 								clicked={()=>{
 									this.props.router.navigate(item.url, true);
 								}}
+								size="big"
 							/>
 						</Fragment>
 					))

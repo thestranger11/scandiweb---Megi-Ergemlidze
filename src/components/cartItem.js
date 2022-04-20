@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import { COLORS } from '../helpers/constants';
+import { COLORS, FONTS } from '../helpers/constants';
 import RadioButtons from './radioButtons';
 import {addProduct, removeProduct} from '../slices/cartSlice';
 import Gallery from './gallery';
@@ -42,7 +42,7 @@ class CartItem extends Component {
 							<RadioButtons 
 								disabled={true}
 								key={item.id}
-								size="small"
+								size={this.props.size}
 								name={item.name} 
 								buttons={item.items}
 								type={item.type}
@@ -55,10 +55,19 @@ class CartItem extends Component {
 							/>
 						))}
 					</div>
-					<Counter>
-						<ActionButton onClick={this.addProduct}>+</ActionButton>
+					<Counter size={this.props.size}>
+						<ActionButton 
+							onClick={this.addProduct}
+							size={this.props.size}
+						>
+							+
+						</ActionButton>
 						<p>{this.props.item.count}</p>
-						<ActionButton onClick={this.removeProduct}>-</ActionButton>
+						<ActionButton 
+							onClick={this.removeProduct}
+							size={this.props.size}>
+							-
+						</ActionButton>
 					</Counter>
 				</Details>
 				{console.log(this.props.item)}
@@ -135,7 +144,7 @@ const Counter = styled.div`
     align-self: stretch;
     text-align: center;
     p {
-        font-size: .777rem;
+        font-size: ${props => props.size === 'small' ? '.777rem' : '1.333rem'};
         line-height: 1.6em;
         font-weight: 500;
         color: ${COLORS.text}
@@ -144,9 +153,19 @@ const Counter = styled.div`
 const ActionButton = styled.button`
     background: ${COLORS.white};
     border: 1px solid ${COLORS.text};
-    width: 24px;
-    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
+	line-height: 1em;
+	font-weight: 200;
+	font-family: ${FONTS.primary};
+	${props => props.size === 'small' ? css`
+		width: 24px;
+		height: 24px;
+		font-size: .8rem;
+	` : css`
+		width: 45px;
+		height: 45px;
+		font-size: 2rem;
+	`};
 `;

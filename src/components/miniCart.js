@@ -48,6 +48,7 @@ class MiniCart extends Component {
 										this.props.router.navigate(item.url, true);
 										this.toggleHandler(this.state.visible && this.props.backdrop);
 									}}
+									size="small"
 								/>
 							))}
 						</ul>

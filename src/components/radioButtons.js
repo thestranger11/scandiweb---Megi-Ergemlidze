@@ -57,7 +57,7 @@ const Radio = styled.label`
 		padding: 13px 25px;
     	margin-right: 12px;
 	`};
-	${props => props.disabled ? css`
+	${props => props.disabled && props.size === 'small' ? css`
 		background: ${props => props.color ? props.color : COLORS.disabledBg};
 		opacity: ${props => props.color ? .5 : 1};
 		color: ${COLORS.disabledText};

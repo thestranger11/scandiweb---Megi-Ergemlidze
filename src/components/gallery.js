@@ -36,7 +36,7 @@ class Gallery extends Component {
 		if(!this.props.data || this.props.data.length <=0){
 			return (
 				<Slide>
-					<img src={NoImage} id="no-image" alt="no image available" />
+					<img src={NoImage} alt="no image available" />
 				</Slide>
 			);
 		}
@@ -55,7 +55,7 @@ class Gallery extends Component {
 						))}
 					</Thumbnails>
 				)}
-				{!this.props.thumbnails && (
+				{(!this.props.thumbnails && this.props.data && this.props.data.length > 1) && (
 					<Arrows>
 						<Arrow 
 							onClick={() => this.prevHandler(this.state.activeIndex)}
@@ -88,12 +88,14 @@ const Flex = styled.div`
     display: flex;
     position: relative;
     padding-left: ${props => props.thumbnails ? '120px' : 0};
+	height: 100%;
 `;
 const Slider = styled.div`
     width: 100%;
 `;
 const Slide = styled.div`
     width: 100%;
+	height: 100%;
     background: ${COLORS.shadow};
     display: none;
     ${props => props.active && css`
@@ -102,12 +104,8 @@ const Slide = styled.div`
     img {
         height: 100%;
         width: 100%;
-        object-position: top;
-        object-fit: contain;
-        &#no-image {
-            object-fit: cover;
-            object-position: center;
-        }
+        object-position: center;
+        object-fit: cover;
     }
 `;
 const Thumbnails = styled.div`

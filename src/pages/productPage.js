@@ -87,7 +87,7 @@ class ProductPage extends Component {
 			cat: this.state.product.category,
 			prices: this.state.product.prices,
 			count: 1,
-			image: this.state.product.gallery[0],
+			image: this.state.product.gallery,
 			attributes: [...this.state.attributes],
 			chosenAttributes: [...this.state.attributeValues],
 		}));

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
-import { COLORS } from '../helpers/constants';
+import { COLORS, FONTS } from '../helpers/constants';
 import RadioButtons from './radioButtons';
 import {addProduct, removeProduct} from '../slices/cartSlice';
+import Gallery from './gallery';
+import { css } from 'styled-components';
 // import { Link } from 'react-router-dom';
 
 
@@ -17,14 +19,22 @@ class CartItem extends Component {
 	};
 	render() { 
 		return (
-			<Container>
+			<Container mini={this.props.mini}>
 				<Details>
 					<div>
 						<Title onClick={this.props.clicked}>
-							<p>{this.props.item.name}</p>
-							<p>{this.props.item.cat}</p>
+							{this.props.mini ? 
+								<label>{this.props.item.name}</label>
+								:
+								<Name>{this.props.item.name}</Name>
+							}
+							{this.props.mini ? 
+								<p>{this.props.item.cat}</p>
+								:
+								<Category>{this.props.item.cat}</Category>
+							}
 						</Title>
-						<Price>
+						<Price mini={this.props.mini}>
 							{this.props.activeCurrency}
 							{this.props.item.prices.find(e=> e.currency.symbol === this.props.activeCurrency) && this.props.item.prices.find(e=> e.currency.symbol === this.props.activeCurrency).amount}
 						</Price>
@@ -32,7 +42,7 @@ class CartItem extends Component {
 							<RadioButtons 
 								disabled={true}
 								key={item.id}
-								size="small"
+								size={this.props.size}
 								name={item.name} 
 								buttons={item.items}
 								type={item.type}
@@ -45,19 +55,25 @@ class CartItem extends Component {
 							/>
 						))}
 					</div>
-					<Counter>
-						<ActionButton onClick={this.addProduct}>+</ActionButton>
+					<Counter size={this.props.size}>
+						<ActionButton 
+							onClick={this.addProduct}
+							size={this.props.size}
+						>
+							+
+						</ActionButton>
 						<p>{this.props.item.count}</p>
-						<ActionButton onClick={this.removeProduct}>-</ActionButton>
+						<ActionButton 
+							onClick={this.removeProduct}
+							size={this.props.size}>
+							-
+						</ActionButton>
 					</Counter>
 				</Details>
-				{this.props.item.image && (
-					<Image 
-						src={this.props.item.image} 
-						alt={this.props.item.name} 
-						onClick={this.props.clicked} 
-					/>
-				)}
+				{console.log(this.props.item)}
+				<GalleryContainer mini={this.props.mini}>
+					<Gallery data={this.props.item.image} />
+				</GalleryContainer>
 			</Container>
 		);
 	}
@@ -71,12 +87,12 @@ export default connect(
 )(CartItem);
 
 const Container = styled.li`
-    padding: 25px 15px;
+    padding: ${props => props.mini ? '25px 15px' : '25px 0'};
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
 `;
-const Title = styled.label`
+const Title = styled.p`
     font-size: .888rem;
     line-height: 1.6em;
     font-weight: 300;
@@ -84,18 +100,35 @@ const Title = styled.label`
     text-transform: capitalize;
     cursor: pointer;
 `;
+const Name = styled.h2`
+	font-weight: 600;
+	font-size: 1.666rem;
+	line-height: .9em;
+	color: ${COLORS.text};
+`;
+const Category = styled.h3`
+	font-weight: 400;
+	color: ${COLORS.text};
+	font-size: 1.666rem;
+	line-height: .9em;
+	margin-top: 15px;
+`;
 const Price = styled.p`
     font-weight: 500;
     font-size: .888rem;
     line-height: 1.6em;
     color: ${COLORS.text};
     margin: 5px 0 25px;
+	${props => !props.mini && css`
+		font-size: 1.333rem;
+		line-height: 1.9em;
+		margin: 12px 0;
+		font-weight: 700;
+	`}
 `;
-const Image = styled.img`
-    height: 140px;
-    width: 105px;
-    object-fit: contain;
-    cursor: pointer;
+const GalleryContainer = styled.div`
+    width: ${props => props.mini ? '105px' : '140px'};
+	
 `;
 const Details = styled.div`
     display: flex;
@@ -111,7 +144,7 @@ const Counter = styled.div`
     align-self: stretch;
     text-align: center;
     p {
-        font-size: .777rem;
+        font-size: ${props => props.size === 'small' ? '.777rem' : '1.333rem'};
         line-height: 1.6em;
         font-weight: 500;
         color: ${COLORS.text}
@@ -120,10 +153,20 @@ const Counter = styled.div`
 const ActionButton = styled.button`
     background: ${COLORS.white};
     border: 1px solid ${COLORS.text};
-    width: 24px;
-    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
+	line-height: 1em;
+	font-weight: 200;
+	font-family: ${FONTS.primary};
 	cursor: pointer;
+	${props => props.size === 'small' ? css`
+		width: 24px;
+		height: 24px;
+		font-size: .8rem;
+	` : css`
+		width: 45px;
+		height: 45px;
+		font-size: 2rem;
+	`};
 `;

@@ -1,6 +1,4 @@
-import { createSlice,
-	current 
-} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	products: [],
@@ -40,7 +38,6 @@ export const cartSlice = createSlice({
 					amount: currentTotal ? item.amount + currentTotal.amount : item.amount
 				};
 			});
-			console.log('currentTotal',current(state));
 		},
 		removeProduct: (state, action) => {
 			let products = state.products;
@@ -60,8 +57,6 @@ export const cartSlice = createSlice({
 					amount: currentTotal ? currentTotal.amount - item.amount : 0
 				};
 			});
-
-			console.log('currentTotal',current(state));
 		}
 	},
 });

@@ -6,7 +6,6 @@ import RadioButtons from './radioButtons';
 import {addProduct, removeProduct} from '../slices/cartSlice';
 import Gallery from './gallery';
 import { css } from 'styled-components';
-// import { Link } from 'react-router-dom';
 
 
 class CartItem extends Component {
@@ -70,7 +69,6 @@ class CartItem extends Component {
 						</ActionButton>
 					</Counter>
 				</Details>
-				{console.log(this.props.item)}
 				<GalleryContainer mini={this.props.mini}>
 					<Gallery data={this.props.item.image} />
 				</GalleryContainer>
@@ -92,7 +90,7 @@ const Container = styled.li`
     justify-content: space-between;
     align-items: stretch;
 `;
-const Title = styled.p`
+const Title = styled.div`
     font-size: .888rem;
     line-height: 1.6em;
     font-weight: 300;

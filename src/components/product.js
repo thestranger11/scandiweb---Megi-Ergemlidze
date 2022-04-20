@@ -24,7 +24,7 @@ class Product extends Component {
 				</ImageContainer>
 				<Info>
 					{this.props.inStock && (
-						<AddToCartButton className='flexOnHover' onClick={()=>console.log('add to cart')}>
+						<AddToCartButton className='flexOnHover' onClick={this.props.onAddToCart}>
 							<img src={Cart} alt="add to cart" />
 						</AddToCartButton>
 					)}
@@ -94,6 +94,7 @@ const AddToCartButton = styled.button`
     position: absolute;
     right: 15px;
     top: -50px;
+	cursor: pointer;
 `;
 const OutOfStockLayer = styled.label`
 	position: absolute;

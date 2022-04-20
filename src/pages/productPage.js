@@ -91,7 +91,7 @@ class ProductPage extends Component {
 			attributes: [...this.state.attributes],
 			chosenAttributes: [...this.state.attributeValues],
 		}));
-		this.props.popupHandler();
+		this.props.popupHandler && this.props.popupHandler();
 	};
 	attributesChangeHandler = (name, val) => {
 		let updatedAttributes = [...this.state.attributeValues];

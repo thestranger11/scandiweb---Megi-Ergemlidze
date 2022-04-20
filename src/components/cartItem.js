@@ -70,7 +70,8 @@ class CartItem extends Component {
 					</Counter>
 				</Details>
 				<GalleryContainer mini={this.props.mini}>
-					<Gallery data={this.props.item.image} />
+					{console.log(this.props.mini)}
+					<Gallery data={this.props.item.image} miniCart={this.props.mini} />
 				</GalleryContainer>
 			</Container>
 		);
@@ -97,6 +98,9 @@ const Title = styled.div`
     color: ${COLORS.text};
     text-transform: capitalize;
     cursor: pointer;
+	* {
+		cursor: pointer;
+	}
 `;
 const Name = styled.h2`
 	font-weight: 600;

@@ -55,7 +55,9 @@ class Gallery extends Component {
 						))}
 					</Thumbnails>
 				)}
-				{(!this.props.thumbnails && this.props.data && this.props.data.length > 1) && (
+				{( !this.props.thumbnails && this.props.data 
+					&& this.props.data.length > 1 && !this.props.miniCart
+				) && (
 					<Arrows>
 						<Arrow 
 							onClick={() => this.prevHandler(this.state.activeIndex)}

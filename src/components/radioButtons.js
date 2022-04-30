@@ -48,15 +48,21 @@ const Radio = styled.label`
 	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	position: relative;
 	margin-top: 2px;
-	${props => props.size === 'small' ? css`
-		padding: 4px 6px;
-		font-size: .777rem;
-		margin-right: 6px;
-	` : css`
-		font-size: .888rem;
-		padding: 13px 25px;
-    	margin-right: 12px;
-	`};
+	margin-bottom: ${props => props.size === 'small' ? 0 : '5px'};
+	padding: 4px 6px;
+	font-size: .777rem;
+	margin-right: 6px;
+	@media(min-width: 425px){
+		${props => props.size === 'small' ? css`
+			padding: 4px 6px;
+			font-size: .777rem;
+			margin-right: 6px;
+		` : css`
+			font-size: .888rem;
+			padding: 13px 25px;
+			margin-right: 12px;
+		`};
+	}
 	${props => props.disabled && props.size === 'small' ? css`
 		background: ${props => props.color ? props.color : COLORS.disabledBg};
 		opacity: ${props => props.color ? .5 : 1};

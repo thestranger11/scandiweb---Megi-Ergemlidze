@@ -33,7 +33,7 @@ class Header extends Component {
 		return (
 			<Container>
 				<StyledHeader>
-					<nav>
+					<Nav>
 						{this.state.categories.map(item=>(
 							<StyledLink 
 								to={`/shop/${item.name}`} 
@@ -42,7 +42,7 @@ class Header extends Component {
 								{item.name}
 							</StyledLink>
 						))}
-					</nav>
+					</Nav>
 					<StyledLink to='/' id="logo">
 						<img src={Logo} alt="logo" />
 					</StyledLink>
@@ -62,11 +62,20 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    height: 80px;
+    height: 60px;
+	margin: 0 -10px;
+    width: calc(100% + 20px);
+    max-width: calc(100% + 20px);
+	@media(min-width: 425px){
+		margin: 0;
+		width: 100%;
+		max-width: 100%;
+		height: 80px;
+	}
 `;
 const StyledLink = styled(NavLink)`
     text-decoration: none;
-    padding: 0 16px;
+    padding: 0 10px;
     display: inline-flex;
     align-items: center;
     height: 100%;
@@ -79,9 +88,22 @@ const StyledLink = styled(NavLink)`
         border-bottom: 2px solid ${COLORS.primary};
         font-weight: 600;
     }
+	@media(min-width: 425px){
+		padding: 0 16px;
+	}
+	img {
+		width: 20px;
+		@media(min-width: 425px){
+			width: auto;
+		}
+	}
 `;
 const Icons = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+`;
+
+const Nav = styled.nav`
+	display: flex;
 `;

@@ -104,16 +104,22 @@ const Title = styled.div`
 `;
 const Name = styled.h2`
 	font-weight: 600;
-	font-size: 1.666rem;
+	font-size: 1.333rem;
 	line-height: .9em;
 	color: ${COLORS.text};
+	@media(min-width: 425px){
+		font-size: 1.666rem;
+	}
 `;
 const Category = styled.h3`
 	font-weight: 400;
 	color: ${COLORS.text};
-	font-size: 1.666rem;
+	font-size: 1.333rem;
 	line-height: .9em;
 	margin-top: 15px;
+	@media(min-width: 425px){
+		font-size: 1.666rem;
+	}
 `;
 const Price = styled.p`
     font-weight: 500;
@@ -129,7 +135,10 @@ const Price = styled.p`
 	`}
 `;
 const GalleryContainer = styled.div`
-    width: ${props => props.mini ? '105px' : '140px'};
+    width: 105px;
+	@media(min-width: 425px){
+		width: ${props => props.mini ? '105px' : '140px'};
+	}
 	
 `;
 const Details = styled.div`
@@ -146,10 +155,13 @@ const Counter = styled.div`
     align-self: stretch;
     text-align: center;
     p {
-        font-size: ${props => props.size === 'small' ? '.777rem' : '1.333rem'};
+        font-size: 1.333rem;
         line-height: 1.6em;
         font-weight: 500;
-        color: ${COLORS.text}
+        color: ${COLORS.text};
+		@media(min-width: 425px){
+			font-size: ${props => props.size === 'small' ? '.777rem' : '1.333rem'};
+		}
     }
 `;
 const ActionButton = styled.button`
@@ -162,13 +174,18 @@ const ActionButton = styled.button`
 	font-weight: 200;
 	font-family: ${FONTS.primary};
 	cursor: pointer;
-	${props => props.size === 'small' ? css`
-		width: 24px;
-		height: 24px;
-		font-size: .8rem;
-	` : css`
-		width: 45px;
-		height: 45px;
-		font-size: 2rem;
-	`};
+	width: 24px;
+	height: 24px;
+	font-size: 1.2rem;
+	@media(min-width: 425px){
+		${props => props.size === 'small' ? css`
+			width: 24px;
+			height: 24px;
+			font-size: 1.2rem;
+		` : css`
+			width: 45px;
+			height: 45px;
+			font-size: 2rem;
+		`};
+	}
 `;

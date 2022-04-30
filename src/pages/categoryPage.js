@@ -150,14 +150,25 @@ const ProductList = styled.ul`
     list-style-type: none;
     flex-wrap: wrap;
     & > li {
-        width: calc((100% - 80px) / 3);
-        margin: 0 40px 100px 0;
+		width: 100%;
+        margin: 0 0 50px 0;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         flex-direction: column;
-        &:nth-child(3n){
-            margin-right: 0;
-        }
+		
+		@media(min-width: 425px){
+			width: calc((100% - 40px) / 2);
+			margin: 0 40px 100px 0;
+			&:nth-child(2n){
+				margin-right: 0;
+			}
+		}
+		@media(min-width: 768px){
+			width: calc((100% - 80px) / 3);
+			&:nth-child(3n){
+				margin-right: 0;
+			}
+		}
     }
 `;

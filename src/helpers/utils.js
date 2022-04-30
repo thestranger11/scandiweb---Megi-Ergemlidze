@@ -51,9 +51,12 @@ export const Button = styled.div`
 	cursor: pointer;
 	${props => props.size === 'small' ? css`
 		padding: 13px;
-		width: 140px;
+		width: 120px;
 		font-size: .777rem;
 		line-height: 1.2em;
+		@media(min-width: 425px){
+			width: 140px;
+		}
 	` : css`
 		padding: 16px;
 		width: 290px;
